@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+      <title>chat with me </title>  
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>  
+      <link rel="stylesheet" href="styles/bundle.css"/>
+      <script src="scripts/bundle.js"></script>
+   </head>
+   <body  ng-app="MainApp"> 
+      <div ng-controller="ChatController" style="width:380px;height:380px"> 
+
+        <div class="container"  ng-show="login_show_flag"> 
+          <form class="form-signin" role="form">
+            <div class="form-group">  
+              <h2 class="form-signin-heading">Please sign in</h2>
+              <input type="input" ng-model="login_user.username" class="form-control" placeholder="No more than four characters" maxlength="4" required autofocus>  
+            </div>
+            <div class="form-group"> 
+              <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="login()" ng-keypress="login_by_key($event)" >Sign in</button>
+            </div>
+          </form> 
+        </div> 
+ 
+          <div ng-show="main_show_flag" id="chatView"  > 
+             <nav class="navbar navbar-inverse" role="navigation">
+                  <span class="navbar-brand" >Chat in chrome</span>
+                  <p class="navbar-text navbar-right">
+                        <span >{{username}}</span>
+                      　<a href="" ng-click="logout()" class="navbar-link">logout</a>
+              　　</p>
+             </nav>  
+             <div id="message_show" style="height:400px; overflow:auto; margin:0;"  class="panel panel-default ">
+                <div  class="panel-body" >
+                  <div style="background:#EFEFF4;font-size:12px;margin-top:10px; margin-left:10px;color:#666;">
+                        <span>{{onlineCount + ' users online，online users list：'}}
+                        <span ng-repeat="(key, value)  in onlineUsers">{{value + " "}}</span>{{online_message}}
+                  </div> 
+                  <section ng-repeat="message in messages" class="{{message.section_class}}"> 
+                     <div ng-if="message.section_type ==1" class="msg-system" ng-bind-html="message.content1"></div> 
+                     <span ng-if="message.section_type ==2" ng-bind-html="message.content1"></span>
+                     <div ng-if="message.section_type ==2" ng-bind-html="message.content2"></div> 
+                     <div ng-if="message.section_type ==3" ng-bind-html="message.content2"></div>
+                     <span ng-if="message.section_type ==3" ng-bind-html="message.content1"></span> 
+                  </section> 
+                </div>
+                <div class="emotion-div"  ng-init="emotion_show_flag = false" ng-show="emotion_show_flag">
+                    <div ng-repeat="(key, value) in emotions"   class="row-div">
+                      <div ng-repeat="emotion in value"  class="icon-emo" ng-click="send_emotion(emotion)">
+                        <i class="demo-icon icon-emo-happy" ng-bind-html="emotion"></i>
+                      </div>
+                    </div>
+                </div>
+             </div> 
+             <div>
+                 <form class="form-inline " role="form">
+                  <div class="form-group col-xs-2">
+                    <button type="button" class="btn btn-default demo-icon" ng-click="emotion_show()">&#xe804;</button>
+                  </div>
+                  <div class="form-group col-xs-8">
+                      <input type="text" id="send_message" autofocus="autofocus" ng-model="send_content" class="form-control" required placeholder="Input Message">
+                  </div>
+                  
+                  <button type="submit"  class="btn btn-primary" ng-click="send()" ng-keypress="send_by_key()">Send</button>
+                </form> 
+             </div> 
+              
+            </nav> 
+         </div> 
+      </div>
+   </body> 
+</html>

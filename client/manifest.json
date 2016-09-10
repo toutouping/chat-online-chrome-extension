@@ -1,0 +1,30 @@
+{ 
+  "name": "chat in chrome",
+  "version": "1.0",
+  "manifest_version":2,
+  "description": "chat in chrome",
+  "background": {
+      "scripts": ["./scripts/background/background.js","./scripts/background/socket.io.js"] //Here you can name the JS file that you have created
+  },
+  "icons":{"16":"./images/16.png","48":"./images/48.png","128":"./images/128.png"}, 
+  "permissions": [
+      "http://api.flickr.com/",
+      "system.cpu",
+      "system.memory"
+     ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+L",
+        "linux": "Ctrl+Shift+L"
+      }
+    }
+  },
+  "browser_action":
+  { 
+  "default_icon": "./images/16.png",
+  "default_title": "chat in chrome",
+  "default_popup": "main.html",
+  "name": "chat in chrome" 
+  }
+}
