@@ -20,7 +20,7 @@ $rootScope.scrollToBottom = function(){
 };
 
 //get emotions
-$http.get("/dest/resources/emotion.json").success(function(response) {$rootScope.emotions = response;});
+$http.get("/resources/emotion.json").success(function(response) {$rootScope.emotions = response;});
 
 //wether the people had login
 chrome.runtime.sendMessage({listen_type:'if_user_exit'},(response)=>{
