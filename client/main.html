@@ -35,12 +35,17 @@
                         <span>{{onlineCount + ' users online，online users list：'}}
                         <span ng-repeat="(key, value)  in onlineUsers">{{value + " "}}</span>{{online_message}}
                   </div> 
-                  <section ng-repeat="message in messages" class="{{message.section_class}}"> 
+                  <section ng-repeat="message in messages" ng-switch on="message.emotion_flag"  class="{{message.section_class}}"> 
                      <div ng-if="message.section_type ==1" class="msg-system" ng-bind-html="message.content1"></div> 
-                     <span ng-if="message.section_type ==2" ng-bind-html="message.content1"></span>
-                     <div ng-if="message.section_type ==2" ng-bind-html="message.content2"></div> 
-                     <div ng-if="message.section_type ==3" ng-bind-html="message.content2"></div>
-                     <span ng-if="message.section_type ==3" ng-bind-html="message.content1"></span> 
+
+                     <span ng-if="message.section_type ==2">{{message.content1}}</span>
+                     <div ng-if="message.section_type ==2" ng-switch-default>{{message.content2}}</div> 
+                     <div ng-if="message.section_type ==2" ng-switch-when="true" ng-bind-html="message.content2"></div> 
+
+                     <div ng-if="message.section_type ==3" ng-switch-default>{{message.content2}}</div>
+                     <div ng-if="message.section_type ==3" ng-switch-when="true" ng-bind-html="message.content2"></div>
+                     <span ng-if="message.section_type ==3" >{{message.content1}}</span>
+
                   </section> 
                 </div>
                 <div class="emotion-div"  ng-init="emotion_show_flag = false" ng-show="emotion_show_flag">

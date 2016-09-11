@@ -25,12 +25,13 @@ main_app.controller('ChatController',($scope,$window)=>{
     }; 
 
      //send messages
-    $scope.send = function(){
+    $scope.send = function(emotion_flag){
         if($scope.send_content){
             let obj = {
                 userid: $scope.login_user.userid,
                 username: $scope.login_user.username,
-                content: $scope.send_content
+                content: $scope.send_content,
+                emotion_flag: emotion_flag
             };  
         chrome.runtime.sendMessage({listen_type:'send', send_obj:obj});
         $scope.send_content = '';  //clear Input box
@@ -47,7 +48,7 @@ main_app.controller('ChatController',($scope,$window)=>{
     //send emotion    
     $scope.send_emotion = function(emotion){
         $scope.send_content = '<div class="icon-emo"><i class="demo-icon icon-emo-happy">'+emotion+'</i></div>';
-        $scope.send();
+        $scope.send(true);
         $scope.emotion_show();
     }; 
 

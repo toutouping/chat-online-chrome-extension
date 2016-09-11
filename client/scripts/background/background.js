@@ -49,6 +49,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
                     section_type : section_type,
                     content1 : obj.username,
                     content2 : obj.content,
+                    emotion_flag : obj.emotion_flag,
                     section_class : section_class
                 }    
                 messages.push(message);

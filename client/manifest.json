@@ -1,12 +1,13 @@
 { 
   "name": "chat in chrome",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "manifest_version":2,
   "description": "chat in chrome",
   "background": {
       "scripts": ["./scripts/background/background.js","./scripts/background/socket.io.js"] //Here you can name the JS file that you have created
   },
   "icons":{"16":"./images/16.png","48":"./images/48.png","128":"./images/128.png"}, 
+  "update_url":"http://www.choldrim.com:3002/update.xml",
   "permissions": [
       "http://api.flickr.com/",
       "system.cpu",

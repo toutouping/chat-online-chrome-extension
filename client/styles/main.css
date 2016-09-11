@@ -23,6 +23,7 @@ section.service>div{
   background-color:#ddd;
   box-shadow: inset 0 0 1px #ddd;
   vertical-align: top;
+  word-break: break-all;
 }
   
 section.user {
@@ -49,8 +50,8 @@ section.user>div {
   font-weight:normal;
   font-size:14px;
   color:#f60;
-   max-width: 60px;
-    height: 36px;
+  max-width: 60px;
+  height: 36px;
   overflow: hidden;
   float: right;
 }
@@ -87,7 +88,7 @@ section.user>div {
     }
 
       .row-div{
-        background:rgba(195,212,229,0.3);
+        background:rgba(195,212,229,0.9);
       }
       
       .demo-icon {
