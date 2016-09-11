@@ -26,6 +26,7 @@ var src_paths = {
     styles: ["./styles/*.css", "./node_modules/bootstrap/dist/css/bootstrap.min.css"],
     htmls: "./main.html",
     images: "./images/*",
+    background_scripts: "./scripts/background/*.js",
     resources: "./resources/**/*",
     script_entry: "./scripts/entry.js",
     fonts: "./styles/fonts/*",
@@ -35,6 +36,7 @@ var src_paths = {
 var dest_paths = {
     styles: "./dest/styles/",
     scripts: "./dest/scripts/",
+    background_scripts: "./dest/scripts/background/",
     htmls: "./dest/",
     images: "./dest/images/",
     resources: "./dest/resources/",
@@ -56,6 +58,7 @@ var task = {
     watch_manifest:"watch_manifest",
     images: "images",
     resources: "resources",
+    background_scripts: "background_scripts",
     live_reload: "live-reload",
     build: "build",
     develop: "develop",
@@ -138,6 +141,11 @@ gulp.task(task.fonts, "copy fonts to dest dir", function(){
         .pipe(gulp.dest(dest_paths.fonts));
 });
 
+gulp.task(task.background_scripts, "copy background_scripts to dest dir", function(){
+    return gulp.src(src_paths.background_scripts)
+        .pipe(gulp.dest(dest_paths.background_scripts));
+});
+
 gulp.task(task.htmls, "copy htmls to dest dir", function(){
     return gulp.src(src_paths.htmls)
         .pipe(gulp.dest(dest_paths.htmls))
@@ -169,5 +177,5 @@ gulp.task(task.watch_htmls, "watch htmls and copy them to dest dir", function(){
     return gulp.watch(src_paths.htmls, [task.htmls]);
 });
 
-gulp.task(task.develop, [task.watch_htmls, task.watch_scripts, task.watch_styles,task.resources,task.watch_manifest, task.serve]);
-gulp.task(task.build, [task.htmls, task.fonts, task.images, task.build_scripts,task.manifest,task.resources, task.build_styles]);
+gulp.task(task.develop, [task.watch_htmls, task.watch_scripts,task.background_scripts, task.watch_styles,task.resources,task.watch_manifest, task.serve]);
+gulp.task(task.build, [task.htmls, task.fonts, task.images,task.background_scripts, task.build_scripts,task.manifest,task.resources, task.build_styles]);
