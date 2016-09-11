@@ -17,7 +17,7 @@ app.get('/update.xml', function(request, response){
       response.end();
     });
 });
-
+/**
 app.get('/chat.crx', function(request, response){
   var filename = 'chat.crx';
   fs.readFile(filename, function(err, content) {
@@ -31,7 +31,7 @@ app.get('/chat.crx', function(request, response){
       response.end();
     });
 });
-
+**/
 
 http.listen(3002, function(){
 	console.log('listening on *:3002');
