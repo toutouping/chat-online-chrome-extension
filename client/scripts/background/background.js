@@ -3,7 +3,7 @@ let messages = [];
 let onlineUsers = {};
 let onlineCount = 0;
 let login_user = {}; 
-const url = 'http://www.choldrim.com:3001/';
+const url = 'ws://www.choldrim.com:3001/';
 
 
 // listening
