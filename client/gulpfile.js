@@ -184,4 +184,4 @@ gulp.task(task.watch_htmls, "watch htmls and copy them to dest dir", function(){
 });
 
 gulp.task(task.develop, [task.watch_htmls, task.watch_scripts,task.watch_background_scripts, task.background_scripts, task.watch_styles,task.resources,task.watch_manifest, task.serve]);
-gulp.task(task.build, [task.htmls, task.fonts,task.watch_background_scripts, task.images,task.background_scripts, task.build_scripts,task.manifest,task.resources, task.build_styles]);
+gulp.task(task.build, [task.htmls, task.fonts,task.images,task.background_scripts, task.build_scripts,task.manifest,task.resources, task.build_styles]);

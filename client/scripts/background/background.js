@@ -91,6 +91,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
     }  
      /////////////To determine whether the user has login
     if(message.listen_type === 'if_user_exit'){
+        message_count= 0;
         updateIcon();
         if(login_user.userid){  // user exist
        　   sendResponse({if_user_exit:true,login_user:login_user,onlineUsers:onlineUsers,onlineCount:onlineCount,reminder:reminder,messages:messages});

@@ -27,7 +27,7 @@ io.on('connection', function(socket){
 	        let message = { 
 	            section_type : 1,
 	            content1 : obj.username + ' joined the chat room',
-	            content2 : '',
+	            content2 : ' ',
 	            section_class : 'system'
 	        }  
 			//Broadcast to all clients

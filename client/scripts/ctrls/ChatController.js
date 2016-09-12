@@ -98,16 +98,11 @@ main_app.controller('ChatController',($scope,$window)=>{
             }
         }
     }; 
-
-    $scope.login_by_key=function($event){
+    
+    //press_key
+    $scope.press_key=function($event){
       if($event.keyCode==13){//when press enter, send messages
-          $scope.send();
-      }
-    }; 
-
-    $scope.send_by_key=function($event){
-      if($event.keyCode==13){//when press enter, send messages
-          $scope.send();
+        $scope.login_show_flag ? $scope.login(): $scope.send();
       }
     }; 
 });

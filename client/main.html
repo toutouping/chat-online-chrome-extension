@@ -22,12 +22,14 @@
         </div> 
  
           <div ng-show="main_show_flag" id="chatView"  > 
-             <nav class="navbar navbar-inverse" role="navigation">
+             <nav class="navbar navbar-inverse" role="navigation"> 
                   <span class="navbar-brand" >Chat in chrome</span>
                   <p class="navbar-text navbar-right">
-                        <input type="checkbox" ng-model="reminder" ng-click="change_reminder()"> notification
-                        <span >{{username}}</span>
-                      　<a href="" ng-click="logout()" class="navbar-link">logout</a>
+                      <label class="checkbox-inline" ng-click="change_reminder()">
+                           &nbsp;<input type="checkbox" ng-model="reminder">notification
+                      </label>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+                      <span >{{username}}</span><a href="" ng-click="logout()" class="navbar-link">logout</a>
               　　</p>
              </nav>  
              <div id="message_show" style="height:400px; overflow:auto; margin:0;"  class="panel panel-default ">
@@ -42,14 +44,18 @@
                      <span ng-if="message.section_type ==2">{{message.content1}}</span>
                      <div ng-if="message.section_type ==2" ng-switch-default>{{message.content2}}</div> 
                      <div ng-if="message.section_type ==2" ng-switch-when="emotion" ng-bind-html="message.content2"></div>
-                     <div ng-if="message.section_type ==2" ng-switch-when="image"><a ng-href="{{message.content2}}"><img src="{{message.content2}}" class="img-responsive" alt=".." width="220px" height="220px"></a></div> 
+                     <div ng-if="message.section_type ==2" ng-switch-when="image">
+                       <a ng-href="{{message.content2}}"><img ng-src="{{message.content2}}" class="img-responsive" alt=".." width="220px" height="220px"></a>
+                     </div> 
 
                      <div ng-if="message.section_type ==3" ng-switch-default>{{message.content2}}</div>
-                     <div ng-if="message.section_type ==3" ng-switch-when="image"><a ng-href="{{message.content2}}"><img src="{{message.content2}}" class="img-responsive" alt=".." width="220px" height="220px"></a></div>
+                     <div ng-if="message.section_type ==3" ng-switch-when="image">
+                          <a ng-href="{{message.content2}}"><img ng-src="{{message.content2}}" class="img-responsive" alt=".." width="220px" height="220px"></a>
+                     </div>
                      <div ng-if="message.section_type ==3" ng-switch-when="emotion" ng-bind-html="message.content2"></div>
                      <span ng-if="message.section_type ==3" >{{message.content1}}</span>
 
-                  </section> 
+                  </section>
                 </div>
                 <div class="emotion-div"  ng-init="emotion_show_flag = false" ng-show="emotion_show_flag">
                     <div ng-repeat="(key, value) in emotions"   class="row-div">
@@ -58,6 +64,9 @@
                       </div>
                     </div>
                 </div>
+                <a class="upload_div" class="board-header-btn mod-show-menu js-show-sidebar" style="position:relative;" href="#">
+                  <span class="board-header-btn-text u-text-underline">Upload File ...</span>
+                </a>
              </div>
              <div>
                  <form class="form-inline " style="padding-top: 15px" role="form">

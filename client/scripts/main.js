@@ -26,6 +26,7 @@ $http.get("/resources/emotion.json").success(function(response) {$rootScope.emot
 
 //wether the people had login
 chrome.runtime.sendMessage({listen_type:'if_user_exit'},(response)=>{
+    console.log(response);
     if(response != false && response.if_user_exit){
         $rootScope.main_show_flag = true;
         $rootScope.login_show_flag = false;
