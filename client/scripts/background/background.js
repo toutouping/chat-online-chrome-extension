@@ -5,7 +5,7 @@ var onlineCount = 0;
 var login_user = {}; 
 var message_count = 0; 
 var reminder = false;
-const url = 'ws://localhost:3001/';
+const url = 'ws://www.choldrim.com:3001/';
 
 //chrome.webNavigation
 function updateIcon() {
@@ -41,7 +41,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
 
             //Listener user exist
             socket.on('logout', function(obj){ 
-                message_count = 0; 
+                message_count = 0;
                 updateIcon();
                 onlineUsers = obj.onlineUsers;   //Current online user list
                 onlineCount = obj.onlineCount;    //Current online user count
@@ -64,7 +64,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
                     section_type : section_type,
                     content1 : obj.username,
                     content2 : obj.content,
-                    emotion_flag : obj.emotion_flag,
+                    content_type : obj.content_type,
                     section_class : section_class
                 }    
                 messages.push(message);
@@ -72,7 +72,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
                     if(!response && !is_login_user){
                         //chrome.notifications api
                         if(reminder){
-                            let notifi_content = obj.emotion_flag ? '发来表情' : obj.content;
+                            let notifi_content = obj.content_type === 'emotion'? '发来表情' : obj.content;
                             new Notification(obj.username, {icon: './images/48.png',body: notifi_content});
                         }
                         message_count++;

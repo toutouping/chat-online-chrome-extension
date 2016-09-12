@@ -25,13 +25,13 @@ main_app.controller('ChatController',($scope,$window)=>{
     }; 
 
      //send messages
-    $scope.send = function(emotion_flag){
+    $scope.send = function(content_type){
         if($scope.send_content){
             let obj = {
                 userid: $scope.login_user.userid,
                 username: $scope.login_user.username,
                 content: $scope.send_content,
-                emotion_flag: emotion_flag
+                content_type: content_type
             };  
         chrome.runtime.sendMessage({listen_type:'send', send_obj:obj});
         $scope.send_content = '';  //clear Input box
@@ -48,15 +48,56 @@ main_app.controller('ChatController',($scope,$window)=>{
     //send emotion    
     $scope.send_emotion = function(emotion){
         $scope.send_content = '<div class="icon-emo"><i class="demo-icon icon-emo-happy">'+emotion+'</i></div>';
-        $scope.send(true);
-        $scope.emotion_show();
+        $scope.send('emotion');
+        $scope.emotion_show_flag = false;
     }; 
 
     //change reminder();
     $scope.change_reminder = function(){
         console.log($scope.reminder);
         chrome.runtime.sendMessage({listen_type:'change_reminder', reminder:$scope.reminder});
-    };  
+    }; 
+    
+    //read image information
+    var imgReader = function( item ){
+        var blob = item.getAsFile(),
+            reader = new FileReader();
+            
+        reader.onload = function( e ){
+            $scope.image_info = e.target.result;
+        };
+        reader.readAsDataURL( blob );
+    };
+
+    //message_paste();
+    $scope.message_paste = function($event){
+        //let
+        let clipboardData = $event.originalEvent.clipboardData, 
+            i = 0, items, item, types;
+        
+        //if anything can paste
+        if( clipboardData ){
+            items = clipboardData.items;
+            if( !items ){
+                return;
+            }
+            item = items[0];
+            types = clipboardData.types || [];  //just the type of data
+            for( ; i < types.length; i++ ){
+                if( types[i] === 'Files' ){
+                    item = items[i];
+                    break;
+                }
+            }
+
+            //just item is img or not
+            if( item && item.kind === 'file' && item.type.match(/^image\//i) ){
+                imgReader( item );  //get imageInfo
+                $scope.send_content = $scope.image_info;
+                $scope.send('image');
+            }
+        }
+    }; 
 
     $scope.login_by_key=function($event){
       if($event.keyCode==13){//when press enter, send messages
