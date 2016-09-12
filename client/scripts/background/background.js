@@ -72,7 +72,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
                     if(!response && !is_login_user){
                         //chrome.notifications api
                         if(reminder){
-                            let notifi_content = obj.content_type === 'emotion'? '发来表情' : obj.content;
+                            let notifi_content = '';
+                            if(obj.content_type === 'emotion'){
+                                notifi_content = '发来表情' 
+                            }else if (obj.content_type === 'image'){
+                                notifi_content = '发来图片' 
+                            }else{
+                                notifi_content = obj.content_type
+                            }
                             new Notification(obj.username, {icon: './images/48.png',body: notifi_content});
                         }
                         message_count++;
