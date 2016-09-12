@@ -12,6 +12,7 @@ $rootScope.onlineCount  = 0;  //Current online user count
 $rootScope.send_content = "";
 $rootScope.main_show_flag = false;
 $rootScope.login_show_flag = true;
+$rootScope.emotion_show_flag = false;
 
 //scroll to bottom
 $rootScope.scrollToBottom = function(){
@@ -28,6 +29,7 @@ chrome.runtime.sendMessage({listen_type:'if_user_exit'},(response)=>{
         $rootScope.main_show_flag = true;
         $rootScope.login_show_flag = false;
         $rootScope.messages = response.messages;
+        $rootScope.reminder = response.reminder;
         $rootScope.onlineUsers = response.onlineUsers,
         $rootScope.onlineCount = response.onlineCount,
         $rootScope.login_user = response.login_user; 
@@ -63,7 +65,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
         $rootScope.$apply(); 
         $rootScope.scrollToBottom(); 
     }
-}); 
-
+});
 });
 

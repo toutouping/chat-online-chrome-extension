@@ -4,7 +4,8 @@ var onlineUsers = {};
 var onlineCount = 0;
 var login_user = {}; 
 var message_count = 0; 
-const url = 'ws://www.choldrim.com:3001/';
+var reminder = false;
+const url = 'ws://localhost:3001/';
 
 //chrome.webNavigation
 function updateIcon() {
@@ -70,8 +71,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
                 chrome.runtime.sendMessage({listen_type:'send_message',message:message},(response)=>{
                     if(!response && !is_login_user){
                         //chrome.notifications api
-                        let notifi_content = obj.emotion_flag ? '发来表情' : obj.content;
-                        new Notification(obj.username, {icon: './images/48.png',body: notifi_content});
+                        if(reminder){
+                            let notifi_content = obj.emotion_flag ? '发来表情' : obj.content;
+                            new Notification(obj.username, {icon: './images/48.png',body: notifi_content});
+                        }
                         message_count++;
                         updateIcon();
                     }  
@@ -81,26 +84,32 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
     }  
      /////////////To determine whether the user has login
     if(message.listen_type === 'if_user_exit'){
-        message_count = 0; 
         updateIcon();
         if(login_user.userid){  // user exist
-       　   sendResponse({if_user_exit:true,login_user:login_user,onlineUsers:onlineUsers,onlineCount:onlineCount,messages:messages});
+       　   sendResponse({if_user_exit:true,login_user:login_user,onlineUsers:onlineUsers,onlineCount:onlineCount,reminder:reminder,messages:messages});
         }else{  //if user dosen't exist
             messages = [];
+            message_count = 0;
             onlineUsers = {};
             onlineCount = 0;
-            login_user = {}; 
+            login_user = {};
+            reminder = false;
             sendResponse({if_user_exit:false});
         }
     }  
     /////////////send messages
     if(message.listen_type === 'send'){
-       　socket.emit('message', message.send_obj); 
+       socket.emit('message', message.send_obj); 
     }  
+    ///////////// change_reminder
+    if(message.listen_type === 'change_reminder'){
+       reminder = message.reminder;
+    }    
     ///////////// lagout
     if(message.listen_type === 'logout'){ 
         socket.disconnect(); // Notify the browser to close the connection
         messages = [];
+        reminder = false;
         login_user = {}; 
     }     
 });

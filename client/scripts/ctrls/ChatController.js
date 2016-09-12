@@ -52,6 +52,12 @@ main_app.controller('ChatController',($scope,$window)=>{
         $scope.emotion_show();
     }; 
 
+    //change reminder();
+    $scope.change_reminder = function(){
+        console.log($scope.reminder);
+        chrome.runtime.sendMessage({listen_type:'change_reminder', reminder:$scope.reminder});
+    };  
+
     $scope.login_by_key=function($event){
       if($event.keyCode==13){//when press enter, send messages
           $scope.send();
