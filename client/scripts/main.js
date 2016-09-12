@@ -24,7 +24,7 @@ $http.get("/resources/emotion.json").success(function(response) {$rootScope.emot
 
 //wether the people had login
 chrome.runtime.sendMessage({listen_type:'if_user_exit'},(response)=>{
-    if(response.if_user_exit){
+    if(response != false && response.if_user_exit){
         $rootScope.main_show_flag = true;
         $rootScope.login_show_flag = false;
         $rootScope.messages = response.messages;
@@ -37,7 +37,7 @@ chrome.runtime.sendMessage({listen_type:'if_user_exit'},(response)=>{
 });
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{ 
-    if(message.listen_type === 'login_success'){  　//when login
+    if(message != false && message.listen_type === 'login_success'){  　//when login
             $rootScope.onlineUsers = message.login_message.onlineUsers;   //Current online user list
             $rootScope.onlineCount = message.login_message.onlineCount;    //Current online user count
             message.login_message.message ? $rootScope.messages.push(message.login_message.message):""; 
@@ -45,7 +45,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
             $rootScope.scrollToBottom();
     }  
 
-    if(message.listen_type === 'logout_success'){  //when logout
+    if(message != false && message.listen_type === 'logout_success'){  //when logout
         $scope.onlineUsers = obj.onlineUsers;    //Current online user list
         $scope.onlineCount = obj.onlineCount;    //Current online user count
         $scope.messages.push(obj.message);
@@ -53,7 +53,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
         $rootScope.scrollToBottom();
      } 
 
-    if(message.listen_type === 'send_message'){  // monitor message
+    if(message != false && message.listen_type === 'send_message'){  // monitor message
+        //show notification
+        if(message != false && message.message.section_class === 'service'){
+            sendResponse(true);
+        }
         $rootScope.messages.push(message.message);
         $rootScope.send_content = "";  
         $rootScope.$apply(); 

@@ -1,6 +1,6 @@
 { 
   "name": "chat in chrome",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "manifest_version":2,
   "description": "chat in chrome",
   "background": {
@@ -9,10 +9,8 @@
   "icons":{"16":"./images/16.png","48":"./images/48.png","128":"./images/128.png"}, 
   "update_url":"http://www.choldrim.com:3002/update.xml",
   "permissions": [
-      "http://api.flickr.com/",
-      "system.cpu",
-      "system.memory"
-     ],
+    "notifications"
+  ],
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {

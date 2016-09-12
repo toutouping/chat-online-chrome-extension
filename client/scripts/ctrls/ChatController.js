@@ -1,7 +1,7 @@
 "use strict";
 
 main_app.controller('ChatController',($scope,$window)=>{ 
-    $scope.login = function(){ 
+    $scope.login = function(){
         $scope.main_show_flag = true;
         $scope.login_show_flag = false;   
 
