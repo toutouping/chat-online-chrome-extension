@@ -67,10 +67,11 @@ section.user>div {
 }
 
 
-/********************  upload_div *************************/
+/********************  image hover *************************/
 
-.upload_div{
-    height: 22px;
-    position:absolute;
-    top:200px;
+section > div:hover >a > img {
+  transform: scale(1.6, 1.6);
+  transition: .3s transform;
 }
+
+ 

@@ -24,7 +24,7 @@
         </div> 
  
           <div ng-show="main_show_flag" id="chatView"  > 
-             <nav class="navbar navbar-inverse" role="navigation"> 
+             <nav class="navbar navbar-inverse" style="margin:0px" role="navigation"> 
                   <span class="navbar-brand" >Chat in chrome</span>
                   <p class="navbar-text navbar-right">
                       <label class="checkbox-inline" ng-click="change_reminder()">
@@ -33,20 +33,22 @@
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
                       <span >{{username}}</span><a href="" ng-click="logout()" class="navbar-link">logout</a>
               　　</p>
-             </nav>  
+             </nav>
+             <div style="height:25px">
+                  <marquee scrolldelay='2' scrollamount='3'> 
+                    <span>{{onlineCount + ' users online，online users list：'}}</span>
+                    <span ng-repeat="(key, value)  in onlineUsers">{{value + "; "}}</span>{{online_message}} 
+                  </marquee>
+             </div>
              <div id="message_show" style="height:463px; overflow:auto; margin:0;"  class="panel panel-default ">
                 <div  class="panel-body" >
-                  <div style="background:#EFEFF4;font-size:12px;margin-top:10px; margin-left:10px;color:#666;">
-                        <span>{{onlineCount + ' users online，online users list：'}}
-                        <span ng-repeat="(key, value)  in onlineUsers">{{value + "; "}}</span>{{online_message}}
-                  </div> 
                   <section ng-repeat="message in messages" ng-switch on="message.content_type"  class="{{message.section_class}}"> 
                      <div ng-if="message.section_type ==1" class="msg-system" ng-bind-html="message.content1"></div> 
 
                      <span ng-if="message.section_type ==2">{{message.content1}}</span>
                      <div ng-if="message.section_type ==2" ng-switch-default>{{message.content2}}</div> 
                      <div ng-if="message.section_type ==2" ng-switch-when="emotion" ng-bind-html="message.content2"></div>
-                     <div ng-if="message.section_type ==2" ng-switch-when="image">
+                     <div ng-if="message.section_type ==2" ng-switch-when="image" style="z-index:9999">
                        <a ng-href="{{message.content2}}"><img ng-src="{{message.content2}}" class="img-responsive" alt=".." width="220px" height="220px"></a>
                      </div> 
 

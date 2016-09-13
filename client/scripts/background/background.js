@@ -5,8 +5,8 @@ var onlineCount = 0;
 var login_user = {}; 
 var message_count = 0; 
 var reminder = false;
-//const url = 'ws://www.choldrim.com:3001/';  
- const url = 'ws://localhost:3001/'; 
+const url = 'ws://www.choldrim.com:3001/';  
+//const url = 'ws://localhost:3001/'; 
 
 //chrome.webNavigation
 function updateIcon() {
