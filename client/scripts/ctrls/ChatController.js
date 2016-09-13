@@ -45,12 +45,23 @@ main_app.controller('ChatController',($scope,$window)=>{
     };
 
 
-    //send emotion    
-    $scope.send_emotion = function(emotion){
+    //send emotion
+    $scope.send_font_emotion = function(emotion){
         $scope.send_content = '<div class="icon-emo"><i class="demo-icon icon-emo-happy">'+emotion+'</i></div>';
         $scope.send('emotion');
         $scope.emotion_show_flag = false;
     }; 
+
+    //send emotion    
+    $scope.send_qq_emotion = function(e) {
+        var o = e.target;
+        if ("A" == o.tagName) { 
+            $scope.send_content = '<a titile="'+o.title+'" class="qqemoji qqemoji0" src="./images/spacer.gif">';
+               console.log($scope ); 
+            $scope.send('emotion');
+            $scope.emotion_show_flag = false;
+        }
+    }
 
     //change reminder();
     $scope.change_reminder = function(){

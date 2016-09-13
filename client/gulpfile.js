@@ -23,18 +23,20 @@ require("gulp-help")(gulp, {
 });
 
 var src_paths = {
-    styles: ["./styles/*.css", "./node_modules/bootstrap/dist/css/bootstrap.min.css"],
+    bootstrap: "./node_modules/bootstrap/dist/**/*",
+    styles: "./styles/*.css",
     htmls: "./main.html",
     images: "./images/*",
     background_scripts: "./scripts/background/*.js",
     resources: "./resources/**/*",
     script_entry: "./scripts/entry.js",
-    fonts: "./styles/fonts/*",
+    fonts: "./styles/fonts/*" ,
     manifest:"./manifest.json"
 }
 
 var dest_paths = {
     styles: "./dest/styles/",
+    bootstrap:"./dest/bootstrap/",
     scripts: "./dest/scripts/",
     background_scripts: "./dest/scripts/background/",
     htmls: "./dest/",
@@ -54,6 +56,7 @@ var task = {
     watch_htmls: "watch-htmls",
     watch_background_scripts: "watch_background_scripts",
     htmls: "htmls",
+    bootstrap:"bootstrap",
     fonts: "fonts",
     manifest:"manifest",
     watch_manifest:"watch_manifest",
@@ -163,6 +166,11 @@ gulp.task(task.resources, "copy resource files to dest dir", function(){
         .pipe(gulp.dest(dest_paths.resources));
 });
 
+gulp.task(task.bootstrap, "copy bootstrap files to dest dir", function(){
+    return gulp.src(src_paths.bootstrap)
+        .pipe(gulp.dest(dest_paths.bootstrap));
+});
+
 gulp.task(task.manifest, "copy manifest files to dest dir", function(){
     return gulp.src(src_paths.manifest)
         .pipe(gulp.dest(dest_paths.manifest));
@@ -183,5 +191,5 @@ gulp.task(task.watch_htmls, "watch htmls and copy them to dest dir", function(){
     return gulp.watch(src_paths.htmls, [task.htmls]);
 });
 
-gulp.task(task.develop, [task.watch_htmls, task.watch_scripts,task.watch_background_scripts, task.background_scripts, task.watch_styles,task.resources,task.watch_manifest, task.serve]);
-gulp.task(task.build, [task.htmls, task.fonts,task.images,task.background_scripts, task.build_scripts,task.manifest,task.resources, task.build_styles]);
+gulp.task(task.develop, [task.watch_htmls,task.bootstrap, task.watch_scripts,task.watch_background_scripts, task.background_scripts, task.watch_styles,task.resources,task.watch_manifest, task.serve]);
+gulp.task(task.build, [task.htmls,task.bootstrap,task.fonts,task.images,task.background_scripts, task.build_scripts,task.manifest,task.resources, task.build_styles]);

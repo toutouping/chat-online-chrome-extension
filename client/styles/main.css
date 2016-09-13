@@ -66,53 +66,11 @@ section.user>div {
   float: left;
 }
 
-/********************  emotion div*************************/
-
-.emotion-div {
-    height: 22px;
-    position:absolute;
-    top:300px;
-    cursor:pointer;
-}
-
- @font-face
-    {
-       font-family:'fontello';
-        src:url('./fonts/fontello.eot');
-        src:url('./fonts/fontello.eot#iefix') format('embedded-opentype'),
-            url('./fonts/fontello.woff') format('woff'),
-            url('./fonts/fontello.ttf') format('truetype'),
-            url('./fonts/fontello.svg#fontello') format('svg');
-        font-weight:normal;
-        font-style:normal;
-    }
-
-      .row-div{
-        background:rgba(195,212,229,0.9);
-      }
-      
-      .demo-icon {
-        font-family:"fontello";
-        font-style:normal;
-        color:#101010;
-    }   
-
-      .icon-emo {
-        display: inline-block;
-        text-align: center;
-        border: 1px solid #b7adb7;
-        background: #f3f3f3;
-        width: 40px;
-        height: 28px;
-        border-radius: 50%;
-        margin: 3px;
-    }
 
 /********************  upload_div *************************/
 
 .upload_div{
     height: 22px;
     position:absolute;
-    top:300px;
-    cursor:pointer;
+    top:200px;
 }
