@@ -52,12 +52,13 @@ main_app.controller('ChatController',($scope,$window)=>{
         $scope.emotion_show_flag = false;
     }; 
 
-    //send emotion    
+    //send qq emotion    
     $scope.send_qq_emotion = function(e) {
-        var o = e.target;
-        if ("A" == o.tagName) { 
-            $scope.send_content = '<a titile="'+o.title+'" class="qqemoji qqemoji0" src="./images/spacer.gif">';
-               console.log($scope ); 
+        let o = e.target;
+        if ("A" == o.tagName) {
+            let index = o.getAttribute("index");
+            console.info(index);
+            $scope.send_content = '<img titile="'+o.title+'" class="qqemoji qqemoji'+index+'" src="./images/spacer.gif"/>';
             $scope.send('emotion');
             $scope.emotion_show_flag = false;
         }
@@ -71,17 +72,20 @@ main_app.controller('ChatController',($scope,$window)=>{
     
     //read image information
     var imgReader = function( item ){
-        var blob = item.getAsFile(),
-            reader = new FileReader();
-            
+        let blob = item.getAsFile();
+        let reader = new FileReader();
+        
         reader.onload = function( e ){
-            $scope.image_info = e.target.result;
+            $scope.send_content = e.target.result;
+            $scope.send('image');
         };
+        
         reader.readAsDataURL( blob );
     };
 
     //message_paste();
     $scope.message_paste = function($event){
+
         //let
         let clipboardData = $event.originalEvent.clipboardData, 
             i = 0, items, item, types;
@@ -104,8 +108,7 @@ main_app.controller('ChatController',($scope,$window)=>{
             //just item is img or not
             if( item && item.kind === 'file' && item.type.match(/^image\//i) ){
                 imgReader( item );  //get imageInfo
-                $scope.send_content = $scope.image_info;
-                $scope.send('image');
+                
             }
         }
     }; 

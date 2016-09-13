@@ -10,7 +10,6 @@ $rootScope.login_user = {};
 $rootScope.onlineUsers = {};  //Current online user list
 $rootScope.onlineCount  = 0;  //Current online user count
 $rootScope.send_content = "";
-$rootScope.image_info;
 $rootScope.main_show_flag = false;
 $rootScope.login_show_flag = true;
 $rootScope.emotion_show_flag = false;
