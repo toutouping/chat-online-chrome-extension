@@ -40,7 +40,7 @@
                     <span ng-repeat="(key, value)  in onlineUsers">{{value + "; "}}</span>{{online_message}} 
                   </marquee>
              </div>
-             <div id="message_show" style="height:463px; overflow:auto; margin:0;"  class="panel panel-default ">
+             <div id="message_show" style="height:458px; overflow:auto; margin:0;"  class="panel panel-default ">
                 <div  class="panel-body" >
                   <section ng-repeat="message in messages" ng-switch on="message.content_type"  class="{{message.section_class}}"> 
                      <div ng-if="message.section_type ==1" class="msg-system" ng-bind-html="message.content1"></div> 
