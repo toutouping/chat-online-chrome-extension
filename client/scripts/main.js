@@ -25,7 +25,7 @@ $http.get("/resources/emotion.json").success(function(response) {$rootScope.emot
 
 //wether the people had login
 chrome.runtime.sendMessage({listen_type:'if_user_exit'},(response)=>{
-    console.log(response);
+    
     if(response != false && response.if_user_exit){
         $rootScope.main_show_flag = true;
         $rootScope.login_show_flag = false;
@@ -40,6 +40,7 @@ chrome.runtime.sendMessage({listen_type:'if_user_exit'},(response)=>{
 });
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{ 
+    console.log(message != false);
     if(message != false && message.listen_type === 'login_success'){  　//when login
             $rootScope.onlineUsers = message.login_message.onlineUsers;   //Current online user list
             $rootScope.onlineCount = message.login_message.onlineCount;    //Current online user count
@@ -57,14 +58,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
      } 
 
     if(message != false && message.listen_type === 'send_message'){  // monitor message
-        //show notification
-        if(message.message.section_class === 'service'){
-            sendResponse(true);
-        }
         $rootScope.messages.push(message.message);
         $rootScope.send_content = "";  
         $rootScope.$apply(); 
-        $rootScope.scrollToBottom(); 
+        $rootScope.scrollToBottom();
+        //show notification 
+        sendResponse({response: true}); 
     }
 });
 });

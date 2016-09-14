@@ -70,9 +70,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
                 }    
                 messages.push(message);
                 chrome.runtime.sendMessage({listen_type:'send_message',message:message},(response)=>{
-                    let = notifi_content = '发来消息';
-                    if(response && !is_login_user){
-                        //chrome.notifications api
+                    let = notifi_content = '' + obj.content;
+                    if(!response && !is_login_user){
                         if(reminder){
                             if(obj.content_type === 'emotion'){
                                 notifi_content = '发来表情';
