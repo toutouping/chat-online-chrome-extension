@@ -58,7 +58,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
 
     if(message != false && message.listen_type === 'send_message'){  // monitor message
         //show notification
-        if(message != false && message.message.section_class === 'service'){
+        if(message.message.section_class === 'service'){
             sendResponse(true);
         }
         $rootScope.messages.push(message.message);

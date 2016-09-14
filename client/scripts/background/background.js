@@ -12,7 +12,7 @@ const url = 'ws://www.choldrim.com:3001/';
 function updateIcon() {
   if (message_count === 0) {
     chrome.browserAction.setIcon({path:"./images/48.png"});
-    chrome.browserAction.setBadgeBackgroundColor({color:''});
+    chrome.browserAction.setBadgeBackgroundColor({color:[208, 0, 24, 255]});
     chrome.browserAction.setBadgeText({text:""});
   } else {
     chrome.browserAction.setIcon({path: "./images/48.png"});
@@ -70,16 +70,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
                 }    
                 messages.push(message);
                 chrome.runtime.sendMessage({listen_type:'send_message',message:message},(response)=>{
-                    if(!response && !is_login_user){
+                    let = notifi_content = '发来消息';
+                    if(response && !is_login_user){
                         //chrome.notifications api
                         if(reminder){
-                            let notifi_content = '';
                             if(obj.content_type === 'emotion'){
-                                notifi_content = '发来表情' 
+                                notifi_content = '发来表情';
                             }else if (obj.content_type === 'image'){
-                                notifi_content = '发来图片' 
-                            }else{
-                                notifi_content = obj.content_type
+                                notifi_content = '发来图片'; 
                             }
                             new Notification(obj.username, {icon: './images/48.png',body: notifi_content});
                         }
@@ -113,6 +111,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
     ///////////// change_reminder
     if(message.listen_type === 'change_reminder'){
        reminder = message.reminder;
+       console.log(reminder);
     }    
     ///////////// lagout
     if(message.listen_type === 'logout'){ 

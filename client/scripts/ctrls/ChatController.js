@@ -58,7 +58,7 @@ main_app.controller('ChatController',($scope,$window)=>{
         if ("A" == o.tagName) {
             let index = o.getAttribute("index");
             console.info(index);
-            $scope.send_content = '<img titile="'+o.title+'" class="qqemoji qqemoji'+index+'" src="./images/spacer.gif"/>';
+            $scope.send_content = '<span titile="'+o.title+'" class="qqemoji qqemoji'+index+'" src="./images/spacer.gif"></span>';
             $scope.send('emotion');
             $scope.emotion_show_flag = false;
         }
@@ -66,7 +66,6 @@ main_app.controller('ChatController',($scope,$window)=>{
 
     //change reminder();
     $scope.change_reminder = function(){
-        console.log($scope.reminder);
         chrome.runtime.sendMessage({listen_type:'change_reminder', reminder:$scope.reminder});
     }; 
     
